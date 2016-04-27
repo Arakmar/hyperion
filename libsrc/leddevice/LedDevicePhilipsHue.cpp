@@ -105,12 +105,12 @@ CiColor PhilipsHueLight::rgbToCiColor(float red, float green, float blue) {
 	// Convert to x,y space.
 	float cx = X / (X + Y + Z);
 	float cy = Y / (X + Y + Z);
-	if (isnan(cx)) {
+	/*if (isnan(cx)) {
 		cx = 0.0f;
 	}
 	if (isnan(cy)) {
 		cy = 0.0f;
-	}
+	}*/
 	// Brightness is simply Y in the XYZ space.
 	CiColor xy = { cx, cy, Y };
 	// Check if the given XY value is within the color reach of our lamps.
