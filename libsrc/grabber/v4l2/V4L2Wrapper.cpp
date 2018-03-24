@@ -15,6 +15,7 @@ V4L2Wrapper::V4L2Wrapper(const std::string &device,
 		double redSignalThreshold,
 		double greenSignalThreshold,
 		double blueSignalThreshold,
+	 	int noSignalCounterThreshold,
 		Hyperion *hyperion,
 		int hyperionPriority) :
 	_timeout_ms(1000),
@@ -38,7 +39,7 @@ V4L2Wrapper::V4L2Wrapper(const std::string &device,
 			redSignalThreshold,
 			greenSignalThreshold,
 			blueSignalThreshold,
-			50);
+			noSignalCounterThreshold);
 
 	// register the image type
 	qRegisterMetaType<Image<ColorRgb>>("Image<ColorRgb>");

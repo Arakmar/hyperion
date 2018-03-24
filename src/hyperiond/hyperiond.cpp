@@ -322,6 +322,7 @@ void startGrabberV4L2(const Json::Value &config, Hyperion &hyperion, ProtoServer
 					grabberConfig.get("redSignalThreshold", 0.0).asDouble(),
 					grabberConfig.get("greenSignalThreshold", 0.0).asDouble(),
 					grabberConfig.get("blueSignalThreshold", 0.0).asDouble(),
+					grabberConfig.get("noSignalCounterThreshold", 50).asInt(),
 					&hyperion,
 					grabberConfig.get("priority", 900).asInt());
 		v4l2Grabber->set3D(parse3DMode(grabberConfig.get("mode", "2D").asString()));

@@ -77,6 +77,7 @@ int main(int argc, char** argv)
 		DoubleParameter		& argRedSignalThreshold = parameters.add<DoubleParameter>	(0x0, "red-threshold",	"The red signal threshold. Value should be between 0.0 and 1.0. (overrides --signal-threshold)");
 		DoubleParameter		& argGreenSignalThreshold = parameters.add<DoubleParameter>  (0x0, "green-threshold",  "The green signal threshold. Value should be between 0.0 and 1.0. (overrides --signal-threshold)");
 		DoubleParameter		& argBlueSignalThreshold = parameters.add<DoubleParameter>   (0x0, "blue-threshold",   "The blue signal threshold. Value should be between 0.0 and 1.0. (overrides --signal-threshold)");
+		IntParameter		& argNoSignalCounterThreshold = parameters.add<IntParameter>   (0x0, "no-signal-threshold",   "The number of frames before detecting no signal");
 		SwitchParameter<>	  & arg3DSBS		   = parameters.add<SwitchParameter<>>	 (0x0, "3DSBS",			"Interpret the incoming video stream as 3D side-by-side");
 		SwitchParameter<>	  & arg3DTAB		   = parameters.add<SwitchParameter<>>	 (0x0, "3DTAB",			"Interpret the incoming video stream as 3D top-and-bottom");
 		StringParameter		& argAddress		 = parameters.add<StringParameter>	   ('a', "address",		  "Set the address of the hyperion server [default: 127.0.0.1:19445]");
@@ -95,6 +96,7 @@ int main(int argc, char** argv)
 		argCropHeight.setDefault(0);
 		argSizeDecimation.setDefault(1);
 		argFrameDecimation.setDefault(1);
+		argNoSignalCounterThreshold.setDefault(50);
 		argAddress.setDefault("127.0.0.1:19445");
 		argPriority.setDefault(800);
 		argSignalThreshold.setDefault(-1);
@@ -132,7 +134,7 @@ int main(int argc, char** argv)
 					std::min(1.0, std::max(0.0, argRedSignalThreshold.isSet() ? argRedSignalThreshold.getValue() : argSignalThreshold.getValue())),
 					std::min(1.0, std::max(0.0, argGreenSignalThreshold.isSet() ? argGreenSignalThreshold.getValue() : argSignalThreshold.getValue())),
 					std::min(1.0, std::max(0.0, argBlueSignalThreshold.isSet() ? argBlueSignalThreshold.getValue() : argSignalThreshold.getValue())),
-					50);
+					argNoSignalCounterThreshold.getValue());
 
 		// set cropping values
 		grabber.setCropping(
